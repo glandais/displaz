@@ -290,9 +290,8 @@ int main(int argc, char *argv[])
     {
         try
         {
-			//std::cout << "sending\n";
             channel->sendMessage("QUERY_CURSOR");
-			//std::cout << "sent, receiving\n";
+			milliSleep(5);
             QByteArray msg = channel->receiveMessage();
             std::cout.write(msg.data(), msg.length());
             std::cout << "\n";
@@ -338,6 +337,7 @@ int main(int argc, char *argv[])
         try
         {
             channel->sendMessage(message);
+			milliSleep(5);
             do
             {
                 msg = channel->receiveMessage(-1);
