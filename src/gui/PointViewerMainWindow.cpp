@@ -497,14 +497,14 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
     else if (commandTokens[0] == "QUERY_CURSOR")
     {
         // Yuck!
-		g_logger.error("creating channel")
+		g_logger.error("creating channel");
         IpcChannel* channel = dynamic_cast<IpcChannel*>(sender());
         if (!channel)
         {
             qWarning() << "Signalling object not a IpcChannel!\n";
             return;
         }
-		g_logger.error("channel created")
+		g_logger.error("channel created");
         V3d p = m_pointView->cursorPos();
         std::string response = tfm::format("%.15g %.15g %.15g", p.x, p.y, p.z);
 		g_logger.error("Sending response : %s", response);
