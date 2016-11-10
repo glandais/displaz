@@ -495,6 +495,7 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
     }
     else if (commandTokens[0] == "QUERY_CURSOR")
     {
+		std::cout << "QUERY_CURSOR";
         // Yuck!
         IpcChannel* channel = dynamic_cast<IpcChannel*>(sender());
         if (!channel)
@@ -504,6 +505,7 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
         }
         V3d p = m_pointView->cursorPos();
         std::string response = tfm::format("%.15g %.15g %.15g", p.x, p.y, p.z);
+		std::cout << response;
         channel->sendMessage(QByteArray(response.data(), (int)response.size()));
     }
     else if (commandTokens[0] == "QUIT")
