@@ -364,7 +364,7 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
     QList<QByteArray> commandTokens = message.split('\n');
     if (commandTokens.empty())
         return;
-	g_logger.error("%s", QString::fromUtf8(commandTokens[0]));
+	//g_logger.error("%s", QString::fromUtf8(commandTokens[0]));
     if (commandTokens[0] == "OPEN_FILES")
     {
         QList<QByteArray> flags = commandTokens[1].split('\0');
@@ -497,17 +497,17 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
     else if (commandTokens[0] == "QUERY_CURSOR")
     {
         // Yuck!
-		g_logger.error("creating channel");
+		//g_logger.error("creating channel");
         IpcChannel* channel = dynamic_cast<IpcChannel*>(sender());
         if (!channel)
         {
             qWarning() << "Signalling object not a IpcChannel!\n";
             return;
         }
-		g_logger.error("channel created");
+		//g_logger.error("channel created");
         V3d p = m_pointView->cursorPos();
         std::string response = tfm::format("%.15g %.15g %.15g", p.x, p.y, p.z);
-		g_logger.error("Sending response : %s", response);
+		//g_logger.error("Sending response : %s", response);
         channel->sendMessage(QByteArray(response.data(), (int)response.size()));
     }
     else if (commandTokens[0] == "QUIT")
