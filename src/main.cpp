@@ -290,9 +290,9 @@ int main(int argc, char *argv[])
     {
         try
         {
-			std::cout << "sending\n";
+			//std::cout << "sending\n";
             channel->sendMessage("QUERY_CURSOR");
-			std::cout << "sent, receiving\n";
+			//std::cout << "sent, receiving\n";
             QByteArray msg = channel->receiveMessage();
             std::cout.write(msg.data(), msg.length());
             std::cout << "\n";
