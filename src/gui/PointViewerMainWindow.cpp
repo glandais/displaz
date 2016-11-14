@@ -514,8 +514,16 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
     {
         show();
         setWindowState(Qt::WindowActive);
+        showNormal();
         raise();
         activateWindow();
+#       ifdef _WIN32
+        ::SetWindowPos(effectiveWinId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+        ::SetWindowPos(effectiveWinId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+#       else
+        setWindowFlags((windowFlags() & Qt::WindowStaysOnTopHint));
+        setWindowFlags((windowFlags() & ~Qt::WindowStaysOnTopHint));
+#       endif
     }
     else if (commandTokens[0] == "SET_MAX_POINT_COUNT")
     {
