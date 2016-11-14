@@ -510,6 +510,11 @@ void PointViewerMainWindow::handleMessage(QByteArray message)
     {
         close();
     }
+    else if (commandTokens[0] == "RAISE")
+    {
+        show();
+        setWindowState(Qt::WindowActive);
+    }
     else if (commandTokens[0] == "SET_MAX_POINT_COUNT")
     {
         m_maxPointCount = commandTokens[1].toLongLong();

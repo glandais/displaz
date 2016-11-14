@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
     bool mutateData = false;
     bool deleteAfterLoad = false;
     bool quitRemote = false;
+    bool raiseRemote = false;
     bool queryCursor = false;
     bool script = false;
 
@@ -111,6 +112,7 @@ int main(int argc, char *argv[])
         "-clear",        &clearFiles,    "Remote: clear all currently loaded files",
         "-unload %s",    &unloadFiles,   "Remote: unload loaded files matching the given (unix shell style) pattern",
         "-quit",         &quitRemote,    "Remote: close the existing displaz window",
+        "-raise",        &raiseRemote,   "Remote: raise the existing displaz window",
         "-add",          &addFiles,      "Remote: add files to currently open set, instead of replacing those with duplicate labels",
         "-modify",       &mutateData,    "Remote: mutate data already loaded with the matching label (requires displaz .ply with an \"index\" field to indicate mutated points)",
         "-rmtemp",       &deleteAfterLoad, "*Delete* files after loading - use with caution to clean up single-use temporary files after loading",
@@ -285,6 +287,10 @@ int main(int argc, char *argv[])
     if (quitRemote)
     {
         channel->sendMessage("QUIT");
+    }
+    if (raiseRemote)
+    {
+        channel->sendMessage("RAISE");
     }
     if (queryCursor)
     {
